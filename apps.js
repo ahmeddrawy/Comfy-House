@@ -77,11 +77,23 @@ class UI{
                 /// save cart in local storage
                 Storage.saveCart(cart);
                 /// set cart values
+                this.setCartValue(cart);
                 /// display cart items
                 ///show the cart
             })
         
         })
+    }
+    setCartValue(cart){
+        let tempTotal = 0;
+        let itemsTotal = 0 ;
+        cart.map(item=>{
+            tempTotal+= item.price *item.amount;
+            itemsTotal+=item.amount;
+        });
+        cartItems.innerText = itemsTotal;
+        console.log(tempTotal);
+        cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     }
 
 }
