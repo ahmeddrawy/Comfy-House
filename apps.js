@@ -92,7 +92,6 @@ class UI{
             itemsTotal+=item.amount;
         });
         cartItems.innerText = itemsTotal;
-        console.log(tempTotal);
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     }
 
