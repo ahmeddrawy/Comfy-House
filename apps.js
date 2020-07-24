@@ -71,7 +71,7 @@ class UI{
                 event.target.innerText = "in cart";
                 event.target.disabled = true;
                 /// get product from products local storage
-                let cartItem =Storage.getProduct(id); 
+                let cartItem ={...Storage.getProduct(id),amount:1}; ///spreading and adding amount property to the product
                 /// add product to cart
                 /// save cart in local storage
                 /// set cart values
