@@ -119,6 +119,9 @@ class UI{
         cartDOM.classList.add('showCart');
         cartOverlay.classList.add('transparentBcg');
     }
+    setupAPP(){
+        cart  = localStorage.getCart();
+    }
 
 }
 /// local storage class
@@ -133,11 +136,15 @@ class Storage{
     static saveCart(cart){
         localStorage.setItem("cart",JSON.stringify(cart));
     }
+    static getCart(){
+        return localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')) : [];
+    }
 }
 /// listener
 document.addEventListener("DOMContentLoaded" , function(){
     const ui = new UI();
     const products = new Products();
+    ui.setupAPP();
     products.getProducts().then((products)=>{
          ui.displayProducts(products)
          Storage.saveProducts(products);
