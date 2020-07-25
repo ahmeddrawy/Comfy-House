@@ -120,7 +120,8 @@ class UI{
         cartOverlay.classList.add('transparentBcg');
     }
     setupAPP(){
-        cart  = localStorage.getCart();
+        cart  = Storage.getCart();
+        this.setCartValue(cart);
     }
 
 }
@@ -144,7 +145,7 @@ class Storage{
 document.addEventListener("DOMContentLoaded" , function(){
     const ui = new UI();
     const products = new Products();
-    ui.setupAPP();
+   ui.setupAPP();
     products.getProducts().then((products)=>{
          ui.displayProducts(products)
          Storage.saveProducts(products);
