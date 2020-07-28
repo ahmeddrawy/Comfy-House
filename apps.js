@@ -119,9 +119,21 @@ class UI{
         cartDOM.classList.add('showCart');
         cartOverlay.classList.add('transparentBcg');
     }
+    hideCart(){
+        cartDOM.classList.remove('showCart');
+        cartOverlay.classList.remove('transparentBcg');
+    }
     setupAPP(){
         cart  = Storage.getCart();
         this.setCartValue(cart);
+        this.populateCart(cart);
+        cartBtn.addEventListener('click',this.showCart);
+        closeCartBtn.addEventListener('click',this.hideCart); /// todo
+    }
+    populateCart(cart){
+        cart.forEach(item=>{
+            this.addCartItem(item);
+        })
     }
 
 }
