@@ -147,6 +147,31 @@ class UI{
                 cartContent.removeChild(removeItem.parentElement.parentElement);
                 this.removeItem(id);
             }
+            else if(event.target.classList.contains('fa-chevron-up')){
+                let addAmount = event.target;
+                let id = addAmount.dataset.id;
+                console.log(id);
+                let tempItem = cart.find(item=>item.id===id);
+                tempItem.amount +=1;
+                Storage.saveCart(cart);
+                this.setCartValue(cart);
+                addAmount.nextElementSibling.innerText = tempItem.amount;
+            }
+            else if(event.target.classList.contains('fa-chevron-down')){
+                let addAmount = event.target;
+                let id = addAmount.dataset.id;
+                console.log(id);
+                let tempItem = cart.find(item=>item.id===id);
+                tempItem.amount -=1;
+                Storage.saveCart(cart);
+                this.setCartValue(cart);
+                addAmount.previousElementSibling.innerText = tempItem.amount;
+                if(tempItem.amount ===0){
+                    //todo
+                    cartContent.removeChild(addAmount.parentElement.parentElement);
+                    this.removeItem(id);
+                }
+            }
         })
     }
     clearCart(){
