@@ -135,6 +135,34 @@ class UI{
             this.addCartItem(item);
         })
     }
+    cartLogic(){
+        /// clear cart btn
+        clearCartBtn.addEventListener('click',()=>{this.clearCart()});
+        
+    }
+    clearCart(){
+        let cartItems = cart.map(item=>item.id);
+        cartItems.forEach(id=>{
+            this.removeItem(id);
+        });
+        while(cartContent.children.length > 0){
+            cartContent.removeChild(cartContent.children[0]);
+        }
+        this.hideCart();
+    }
+    removeItem(id){
+        cart = cart.filter(item=>item.id!==id);
+        this.setCartValue(cart);
+        Storage.saveCart(cart);
+        let btn = this.getSingleButton(id);
+        btn.disabled = false; 
+        btn.innerHTML=`<i class="fas fa-shopping-cart"></i> add to cart`
+    }
+    getSingleButton(id){
+        return buttonsDOM.find(btn=>{
+           return btn.dataset.id ===id;
+        });
+    }
 
 }
 /// local storage class
@@ -157,11 +185,12 @@ class Storage{
 document.addEventListener("DOMContentLoaded" , function(){
     const ui = new UI();
     const products = new Products();
-   ui.setupAPP();
+    ui.setupAPP();
     products.getProducts().then((products)=>{
          ui.displayProducts(products)
          Storage.saveProducts(products);
     }).then(()=>{
         ui.getBtns();
+        ui.cartLogic();
     });
 })
