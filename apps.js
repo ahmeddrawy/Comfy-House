@@ -197,6 +197,15 @@ class UI{
            return btn.dataset.id ===id;
         });
     }
+    clickOutsideCart(){
+        document.onclick = function(e){
+            console.log(e.target);
+            if(e.target.id ==="cart-overlay"){
+                cartDOM.classList.remove('showCart');
+                cartOverlay.classList.remove('transparentBcg');
+            }
+        } 
+     }
 
 }
 /// local storage class
@@ -225,6 +234,7 @@ document.addEventListener("DOMContentLoaded" , function(){
          Storage.saveProducts(products);
     }).then(()=>{
         ui.getBtns();
+        ui.clickOutsideCart();
         ui.cartLogic();
     });
 })
