@@ -213,6 +213,18 @@ class UI{
             }
         })
      }
+     heroBtnSetup(){
+         /**
+          * jumping to products by pressing shop now btn in the hero 
+          * todo edit using  jquery to make it smooth scroll
+          */
+         
+         let btn = document.getElementById("shopNow-btn");
+        btn.addEventListener("click" , ()=>{
+            document.getElementById('prods-div').scrollIntoView();
+
+        }) 
+     }
 
 }
 /// local storage class
@@ -242,6 +254,7 @@ document.addEventListener("DOMContentLoaded" , function(){
     }).then(()=>{
         ui.getBtns();
         ui.clickOutsideCart();
+        ui.heroBtnSetup();
         ui.cartLogic();
     });
 })
