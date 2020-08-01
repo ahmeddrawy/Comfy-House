@@ -197,6 +197,22 @@ class UI{
            return btn.dataset.id ===id;
         });
     }
+    clickOutsideCart(){
+        /**
+         * helping improving the UI by closing the cart using 'esc' key or clicking outside the boundaries of cart
+         */
+        document.onclick = function(event){
+            if(event.target.id ==="cart-overlay"){
+                cartDOM.classList.remove('showCart');
+                cartOverlay.classList.remove('transparentBcg');
+            }
+        } 
+        document.addEventListener("keydown",event=>{
+            if(event.keyCode===27){///esc key
+                this.hideCart();
+            }
+        })
+     }
 
 }
 /// local storage class
@@ -225,6 +241,7 @@ document.addEventListener("DOMContentLoaded" , function(){
          Storage.saveProducts(products);
     }).then(()=>{
         ui.getBtns();
+        ui.clickOutsideCart();
         ui.cartLogic();
     });
 })
